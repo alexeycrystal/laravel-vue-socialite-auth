@@ -39,46 +39,47 @@ return [
      * Socialite services:
      */
     'facebook' => [
-        'client_id' => '122264405094716',
-        'client_secret' => 'a0d6de3b94d8160c2f008590418c5606',
-        'redirect' => 'http://localhost:8000/login/facebook/callback',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT_URL'),
     ],
 
     'google' => [
-        'client_id' => '49335660341-k98bppthtm0r3am3gmh02v2qnirvkvrq.apps.googleusercontent.com',
-        'client_secret' => '3BaiE84kEHWhXS9QGfnCsesA',
-        'redirect' => 'http://localhost:8000/login/google/callback',
+        'client_id' => env('GOOLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
 
-    'twitter' => [
-        'client_id' => 'your-twitter-app-id',
-        'client_secret' => 'your-twitter-app-secret',
-        'redirect' => 'http://your-callback-url',
-    ],
     /*
-     *
-    'github' => [
-        'client_id' => 'your-github-app-id',
-        'client_secret' => 'your-github-app-secret',
-        'redirect' => 'http://your-callback-url',
-    ],
+         *
+        'twitter' => [
+            'client_id' => 'your-twitter-app-id',
+            'client_secret' => 'your-twitter-app-secret',
+            'redirect' => 'http://your-callback-url',
+        ],
 
-    'linkedin' => [
-        'client_id' => 'your-linkedin-app-id',
-        'client_secret' => 'your-linkedin-app-secret',
-        'redirect' => 'http://your-callback-url',
-    ],
+        'github' => [
+            'client_id' => 'your-github-app-id',
+            'client_secret' => 'your-github-app-secret',
+            'redirect' => 'http://your-callback-url',
+        ],
 
-    'twitter' => [
-        'client_id' => 'your-twitter-app-id',
-        'client_secret' => 'your-twitter-app-secret',
-        'redirect' => 'http://your-callback-url',
-    ],
+        'linkedin' => [
+            'client_id' => 'your-linkedin-app-id',
+            'client_secret' => 'your-linkedin-app-secret',
+            'redirect' => 'http://your-callback-url',
+        ],
 
-    'vk' => [
-        'client_id' => 'your-vk-app-id',
-        'client_secret' => 'your-vk-app-secret',
-        'redirect' => 'http://your-callback-url',
-    ],
-    */
+        'twitter' => [
+            'client_id' => 'your-twitter-app-id',
+            'client_secret' => 'your-twitter-app-secret',
+            'redirect' => 'http://your-callback-url',
+        ],
+
+        'vk' => [
+            'client_id' => 'your-vk-app-id',
+            'client_secret' => 'your-vk-app-secret',
+            'redirect' => 'http://your-callback-url',
+        ],
+        */
 ];
