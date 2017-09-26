@@ -67,26 +67,24 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        if (isset($request->social)) {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|between:6,25|confirmed'
+        ]);
 
-        } else {
-            $this->validate($request, [
-                'name' => 'required|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|between:6,25|confirmed'
-            ]);
+        $user = new User($request->all());
+        $user->name = $request->name;
+        $user->password = bcrypt($request->password);
+        $user->email = $request->email;
+        $user->api_token = str_random(60);
+        $user->save();
 
-            $user = new User($request->all());
-            $user->name = $request->name;
-            $user->password = bcrypt($request->password);
-            $user->email = $request->email;
-            $user->api_token = str_random(60);
-            $user->save();
-
-            return response()->json([
-                'registered' => true
-            ]);
-        }
+        return response()->json([
+            'registered' => true,
+            'api_token' => $user->api_token,
+            'user_id' => $user->id
+        ]);
     }
 
     public function login(Request $request)

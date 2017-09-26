@@ -58,6 +58,7 @@
                     .then((response) => {
                         if(response.data.registered){
                             Auth.set(response.data.api_token, response.data.user_id);
+                            console.log(Auth.state);
                             Status.setSuccess('You have successfully created an account!');
                             this.$router.push('/');
                         }
