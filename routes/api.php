@@ -1,7 +1,9 @@
 <?php
 
-Route::get('auth/{provider}', 'AuthController@redirectToProvider');
-Route::get('auth/{provider}/callback', 'AuthController@handleProviderCallback');
+Route::group(['middleware' => 'cors'], function () {
+    Route::get('/social/{provider}', 'AuthController@redirectToProvider');
+    Route::get('/social/{provider}/callback', 'AuthController@handleProviderCallback');
+});
 
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');

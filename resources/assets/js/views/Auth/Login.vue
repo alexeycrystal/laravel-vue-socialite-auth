@@ -11,13 +11,13 @@
         </div>
         <div class="right">
             <div class="connect">or connect with</div>
-            <a href="" class="facebook">
+            <a @click.stop="socialLogin('facebook')" class="facebook">
                 <span class="fontawesome-facebook"></span>
             </a> <br />
-            <a href="" class="twitter">
+            <a @click.stop="socialLogin('twitter')" class="twitter">
                 <span class="fontawesome-twitter"></span>
             </a> <br />
-            <a href="" class="google-plus">
+            <a @click.stop="socialLogin('google')" class="google-plus">
                 <span class="fontawesome-google-plus"></span>
             </a>
         </div>
@@ -25,7 +25,7 @@
 </template>
 <script type="text/javascript">
     import Auth from '../../store/auth'
-    import {post} from '../../helpers/api'
+    import {get,post} from '../../helpers/api'
     import Status from '../../helpers/status'
     export default {
         data(){
@@ -57,6 +57,14 @@
                         }
                         this.isProcessing = false;
                     })
+            },
+            socialLogin(provider){
+                this.isProcessing = true;
+                this.error = {};
+                get(`/api/social/${provider}`)
+                    .then((response) => {
+                    console.log(response.data);
+                })
             }
         }
     }

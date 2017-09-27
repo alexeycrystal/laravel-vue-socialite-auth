@@ -497,8 +497,8 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export get */
-/* harmony export (immutable) */ __webpack_exports__["a"] = post;
+/* harmony export (immutable) */ __webpack_exports__["a"] = get;
+/* harmony export (immutable) */ __webpack_exports__["b"] = post;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_auth__ = __webpack_require__(1);
@@ -11283,7 +11283,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         logout: function logout() {
             var _this = this;
 
-            Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["a" /* post */])('/api/logout').then(function (response) {
+            Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["b" /* post */])('/api/logout').then(function (response) {
                 if (response.data.logged_out) {
                     __WEBPACK_IMPORTED_MODULE_0__store_auth__["a" /* default */].remove();
                     _this.$router.push('/login');
@@ -15061,7 +15061,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.isProcessing = true;
             this.error = {};
-            Object(__WEBPACK_IMPORTED_MODULE_0__helpers_api__["a" /* post */])('/api/register', this.form).then(function (response) {
+            Object(__WEBPACK_IMPORTED_MODULE_0__helpers_api__["b" /* post */])('/api/register', this.form).then(function (response) {
                 if (response.data.registered) {
                     __WEBPACK_IMPORTED_MODULE_2__store_auth__["a" /* default */].set(response.data.api_token, response.data.user_id);
                     console.log(__WEBPACK_IMPORTED_MODULE_2__store_auth__["a" /* default */].state);
@@ -15379,7 +15379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.isProcessing = true;
             this.error = {};
-            Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["a" /* post */])('/api/login', this.form).then(function (response) {
+            Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["b" /* post */])('/api/login', this.form).then(function (response) {
                 if (response.data.authenticated) {
                     __WEBPACK_IMPORTED_MODULE_0__store_auth__["a" /* default */].set(response.data.api_token, response.data.user_id);
                     __WEBPACK_IMPORTED_MODULE_2__helpers_status__["a" /* default */].setSuccess('You have successfully logged in!');
@@ -15391,6 +15391,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.error = err.response.data.error;
                 }
                 _this.isProcessing = false;
+            });
+        },
+        socialLogin: function socialLogin(provider) {
+            this.isProcessing = true;
+            this.error = {};
+            Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["a" /* get */])('/api/social/' + provider).then(function (response) {
+                console.log(response.data);
             });
         }
     }
@@ -15485,36 +15492,59 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "right" }, [
+        _c("div", { staticClass: "connect" }, [_vm._v("or connect with")]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "facebook",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.socialLogin("facebook")
+              }
+            }
+          },
+          [_c("span", { staticClass: "fontawesome-facebook" })]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "twitter",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.socialLogin("twitter")
+              }
+            }
+          },
+          [_c("span", { staticClass: "fontawesome-twitter" })]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "google-plus",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.socialLogin("google")
+              }
+            }
+          },
+          [_c("span", { staticClass: "fontawesome-google-plus" })]
+        )
+      ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "right" }, [
-      _c("div", { staticClass: "connect" }, [_vm._v("or connect with")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "facebook", attrs: { href: "" } }, [
-        _c("span", { staticClass: "fontawesome-facebook" })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("a", { staticClass: "twitter", attrs: { href: "" } }, [
-        _c("span", { staticClass: "fontawesome-twitter" })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("a", { staticClass: "google-plus", attrs: { href: "" } }, [
-        _c("span", { staticClass: "fontawesome-google-plus" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

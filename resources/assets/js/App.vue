@@ -44,8 +44,8 @@
                 post('/api/logout')
                     .then((response) => {
                         if(response.data.logged_out){
-                            Auth.remove()
-                            this.$router.push('/login')
+                            Auth.remove();
+                            this.$router.push('/login');
                         }
                     })
             }
