@@ -46,14 +46,14 @@
                     .then((response) => {
                         if(response.data.authenticated){
                             Auth.set(response.data.api_token, response.data.user_id);
-                            Flash.setSuccess('You have successfully logged in!');
+                            Status.setSuccess('You have successfully logged in!');
                             this.$router.push('/');
                         }
                         this.isProcessing = false;
                     })
-                    .catch((error) => {
-                        if(error.response.data.error){
-                            this.error = error.response.data.error;
+                    .catch((err) => {
+                        if(err.response.data.error){
+                            this.error = err.response.data.error;
                         }
                         this.isProcessing = false;
                     })

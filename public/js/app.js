@@ -15382,13 +15382,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["a" /* post */])('/api/login', this.form).then(function (response) {
                 if (response.data.authenticated) {
                     __WEBPACK_IMPORTED_MODULE_0__store_auth__["a" /* default */].set(response.data.api_token, response.data.user_id);
-                    Flash.setSuccess('You have successfully logged in!');
+                    __WEBPACK_IMPORTED_MODULE_2__helpers_status__["a" /* default */].setSuccess('You have successfully logged in!');
                     _this.$router.push('/');
                 }
                 _this.isProcessing = false;
-            }).catch(function (error) {
-                if (error.response.data.error) {
-                    _this.error = error.response.data.error;
+            }).catch(function (err) {
+                if (err.response.data.error) {
+                    _this.error = err.response.data.error;
                 }
                 _this.isProcessing = false;
             });
