@@ -11,25 +11,6 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-/*Socialite routes begin */
-Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
-
-Route::get('login/google', 'Auth\LoginController@redirectToProvider');
-Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
-
-Route::get('login/twitter', 'Auth\LoginController@redirectToProvider');
-Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallback');
-/*Socialite routes end */
+})->where(['any' => '.*']);

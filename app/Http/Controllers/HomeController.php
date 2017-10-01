@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 class HomeController extends Controller
 {
     /**
@@ -22,5 +25,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function options(Request $request, Response $response)
+    {
+        if ($request->getMethod() == "OPTIONS"){
+            return response()->json([
+                'OPTIONS' => 'success',
+            ]);
+        }
+        die();
     }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+use Illuminate\Http\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,8 +25,13 @@ class AuthController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        //return Socialite::driver('facebook')->redirect();
         return Socialite::driver($provider)->stateless()->redirect();
+
+        /*
+        return response()->json([
+            'getAuthUrl' => json_encode(Socialite::driver($provider)->stateless()->getAuthUrl(null))
+        ]);
+        */
     }
 
     /**
@@ -36,8 +41,8 @@ class AuthController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        $userSocial = Socialite::driver($provider)->user();
-        echo response()->json([
+        $userSocial = Socialite::driver($provider)->stateless()->user();
+        return response()->json([
             'logMessage' => json_encode($userSocial)
         ]);
 

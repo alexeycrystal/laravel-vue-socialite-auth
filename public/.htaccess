@@ -1,4 +1,8 @@
 <IfModule mod_rewrite.c>
+    Header set Access-Control-Allow-Origin "http://localhost:8080"
+    Header set Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS"
+    Header set Access-Control-Allow-Credentials "true"
+
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
