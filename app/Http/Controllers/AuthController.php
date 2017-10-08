@@ -38,32 +38,40 @@ class AuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $userSocial = Socialite::driver($provider)->stateless()->user();
-        return response()->json([
-            'logMessage' => json_encode($userSocial)
-        ]);
-
-        /* Google
-        $userSocial = Socialite::driver('google')->user();
-        return $userSocial->token;
-        */
-
-        /*
-         * FACEBOOK
-        $findUser = User::where('email', $userSocial->email)->first();
-        if ($findUser) {
-            Auth::login($findUser);
-            return 'Done with old!';
-        } else {
-            //return $userSocial->name;
-            $user = New User;
-            $user->name = $userSocial->name;
-            $user->email = $userSocial->email;
-            $user->password = bcrypt(1236345);
-            $user->save();
-            Auth::login($userSocial->email);
-            return 'Done!';
+        if($userSocial && isset($userSocial->email) && isset($userSocial->id)){
+            $findUser = User::where('email', $userSocial->email)->first();
+            if ($findUser) {
+                if(Hash::check($findUser->password, bcrypt($userSocial->email . $userSocial->id))){
+                    $findUser->api_token = str_random(60);
+                    $findUser->save();
+                    return response()->json([
+                        'authenticated' => true,
+                        'api_token' => $findUser->api_token,
+                        'user_id' => $findUser->id
+                    ]);
+                }else{
+                    return response()->json([
+                        'error' => 'Passwords does not match! Check you input and try again.'
+                    ]);
+                }
+            } else {
+                $user = New User;
+                $user->name = $userSocial->name;
+                $user->email = $userSocial->email;
+                $user->password = bcrypt($userSocial->email . $userSocial->id);
+                $user->api_token = str_random(60);
+                $user->save();
+                return response()->json([
+                    'registered' => true,
+                    'api_token' => $user->api_token,
+                    'user_id' => $user->id
+                ]);
+            }
+        }else{
+            return response()->json([
+                'error' => 'User is unavailable. Try another social account!'
+            ]);
         }
-        */
     }
 
     public function register(Request $request)
