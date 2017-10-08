@@ -4,13 +4,13 @@ export default {
         error: null
     },
     setSuccess(message) {
-        this.state.success = message
+        this.state.success = message;
         setTimeout(() => {
             this.removeSuccess()
     }, 3000)
     },
     setError(message){
-        this.state.error = message
+        this.state.error = message;
         setTimeout(() => {
             this.removeError()
     }, 10000)

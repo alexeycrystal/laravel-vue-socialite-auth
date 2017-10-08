@@ -5,7 +5,7 @@
             <small class="error__control" v-if="Object.keys(error).length !== 0">{{error}}</small><br />
             <label for="email">Email</label> <br />
             <input type="email" name="email" id="email" v-model="form.email"/> <br />
-            <label for="password">Password</label> <br />
+            <label for="pass">Password</label> <br />
             <input type="password" name="password" id="pass" v-model="form.password"/> <br />
             <input :disabled="isProcessing" type="submit" value="Login" />
         </div>
@@ -63,8 +63,19 @@
                 this.error = {};
                 get(`/api/social/${provider}`)
                     .then((response) => {
-                    console.log(response.data);
+                    if(response.data.error){
+                        this.error = err.response.data.error;
+                    }else if(response.data.redirectUrl){
+                        window.location.href = response.data.redirectUrl
+                    }
                 })
+                    .catch((err) => {
+                    if(err.response.data.error){
+                        this.error = err.response.data.error;
+                    }
+                    this.isProcessing = false;
+                });
+                this.isProcessing = false;
             }
         }
     }

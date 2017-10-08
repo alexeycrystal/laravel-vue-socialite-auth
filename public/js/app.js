@@ -15394,11 +15394,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         socialLogin: function socialLogin(provider) {
+            var _this2 = this;
+
             this.isProcessing = true;
             this.error = {};
             Object(__WEBPACK_IMPORTED_MODULE_1__helpers_api__["a" /* get */])('/api/social/' + provider).then(function (response) {
-                console.log(response.data);
+                if (response.data.error) {
+                    _this2.error = err.response.data.error;
+                } else if (response.data.redirectUrl) {
+                    window.location.href = response.data.redirectUrl;
+                }
+            }).catch(function (err) {
+                if (err.response.data.error) {
+                    _this2.error = err.response.data.error;
+                }
+                _this2.isProcessing = false;
             });
+            this.isProcessing = false;
         }
     }
 });
@@ -15460,7 +15472,7 @@ var render = function() {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+        _c("label", { attrs: { for: "pass" } }, [_vm._v("Password")]),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
