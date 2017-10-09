@@ -181,7 +181,6 @@ return [
          * Third party providers
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
