@@ -22,9 +22,14 @@
 <script type="text/javascript">
     import Auth from './store/auth'
     import {post} from './helpers/api'
+
     export default {
         created(){
-            Auth.initialize()
+            Auth.initialize(this.$cookie.get('authentication'));
+            this.$cookie.delete('authentication');
+            if(Auth.state.redirect){
+                this.$router.push(Auth.state.redirect);
+            }
         },
         data() {
             return {

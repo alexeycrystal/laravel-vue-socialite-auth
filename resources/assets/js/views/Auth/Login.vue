@@ -28,6 +28,12 @@
     import {get,post} from '../../helpers/api'
     import Status from '../../helpers/status'
     export default {
+        created(){
+            if(Auth.state.error){
+                this.error = Auth.state.error.includes('+')
+                    ? Auth.state.error.replace(/\+/gi,' ') : Auth.state.error;
+            }
+        },
         data(){
             return {
                 form: {
