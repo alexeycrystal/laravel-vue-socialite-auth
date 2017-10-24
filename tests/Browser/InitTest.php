@@ -16,8 +16,10 @@ class InitTest extends DuskTestCase
     public function testInit()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('http://localhost:8000')
-                ->assertSee('Laravel');
+            $appUrl = env("APP_URL", "http://localhost:8000");
+            $browser->visit($appUrl)
+                ->assertSee('Login')
+                ->assertSee('Register');
         });
     }
 }

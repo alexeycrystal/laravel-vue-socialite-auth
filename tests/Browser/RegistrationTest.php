@@ -24,15 +24,16 @@ class RegistrationTest extends DuskTestCase
             $appUrl = env("APP_URL", "http://localhost:8000");
 
             $first->visit($appUrl . '/#/register')
-                ->waitFor('.panel-body')
+                ->pause(2000)
                 ->type('#name', 'Judge Dredd')
                 ->type('#email', 'i.am.the.law@guilty.com')
-                ->type('#password', 'password')
-                ->type('#password-confirm', 'password')
+                ->type('#pass', 'password')
+                ->type('#passConfirm', 'password')
                 ->press('Register')
                 ->pause(2000)
-                ->assertPathIs('/#/')
-                ->logout();
+                ->assertPathIs('/')
+                ->pause(1500)
+                ->clickLink('Logout');
 
             $user = factory(User::class)->create([
                 'name' => 'Pablo Escobar',
@@ -41,27 +42,26 @@ class RegistrationTest extends DuskTestCase
             ]);
 
             $first->visit($appUrl . '/#/register')
-                ->waitFor('.panel-body')
+                ->pause(2000)
                 ->type('#name', $user->name)
                 ->type('#email', $user->email)
-                ->type('#password', 'cartelquertyl11')
-                ->type('#password-confirm', 'cartelquertyl11')
+                ->type('#pass', 'cartelquertyl11')
+                ->type('#passConfirm', 'cartelquertyl11')
                 ->press('Register')
                 ->pause(2000)
-                ->assertPathIs('/#/register')
-                ->waitFor('.help-block')
+                ->assertPathIs('/')
+                ->waitFor('.error__control')
                 ->assertSee('The email has already been taken.');
 
             $first->visit($appUrl . '/#/register')
-                ->waitFor('.panel-body')
+                ->pause(2000)
                 ->type('#name', 'Achilles Debussy')
                 ->type('#email', 'iamthebest@tor.onion')
-                ->type('#password', 'fightmeifyoucan')
-                ->type('#password-confirm', 'dontfightmeifyoucan')
+                ->type('#pass', 'fightmeifyoucan')
+                ->type('#passConfirm', 'dontfightmeifyoucan')
                 ->press('Register')
                 ->pause(2000)
-                ->assertPathIs('/#/register')
-                ->waitFor('.help-block')
+                ->waitFor('.error__control')
                 ->assertSee('The password confirmation does not match.');
         });
     }

@@ -27,22 +27,22 @@ class LoginTest extends DuskTestCase
                 'password' => Hash::make('password')
             ]);
 
-            $first->visit($appUrl . '#/login')
-                ->waitFor('.login-form')
+            $first->visit($appUrl . '/#/login')
+                ->pause(2000)
                 ->type('#email', $user1->email)
                 ->type('#pass', 'password')
                 ->press('Login')
                 ->pause(2000)
-                ->assertPathIs('/#/')
-                ->logout();
+                ->assertPathIs('/')
+                ->clickLink('Logout');
 
             $first->visit($appUrl . '/#/login')
-                ->waitFor('.panel-body')
+                ->pause(2000)
                 ->type('#email', $user1->email)
                 ->type('#pass', 'fakepassword')
                 ->press('Login')
                 ->pause(2000)
-                ->assertPathIs('/#/login')
+                ->assertPathIs('/')
                 ->waitFor('.error__control')
                 ->assertSee('Provided email and password does not match or not exists!');
         });
