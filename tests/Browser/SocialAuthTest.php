@@ -4,10 +4,12 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\InitialiseDatabaseTrait;
 
 class SocialAuthTest extends DuskTestCase
 {
+    use InitialiseDatabaseTrait;
+
     /**
      * A Dusk test example.
      *
@@ -15,10 +17,12 @@ class SocialAuthTest extends DuskTestCase
      */
     public function testSocialAuth()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                ->assertVue('auth.user_id', null, )
-                ->assertSee('Laravel');
-        });
+
+    }
+
+    public function setUpTraits()
+    {
+        $this->backupDatabase();
+        parent::setUpTraits();
     }
 }
