@@ -71,7 +71,7 @@
                     .then((response) => {
                     if(response.data.error){
                         this.error = err.response.data.error;
-                    }else if(response.data.redirectUrl){
+                    } else if(response.data.redirectUrl){
                         window.location.href = response.data.redirectUrl
                     }
                 })
