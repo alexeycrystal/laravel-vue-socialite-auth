@@ -41,7 +41,9 @@
                     password: ''
                 },
                 error: {},
-                isProcessing: false
+                isProcessing: false,
+                auth: null,
+                status: null,
             }
         },
         methods: {
@@ -53,6 +55,8 @@
                         if(response.data.authenticated){
                             Auth.set(response.data.api_token, response.data.user_id);
                             Status.setSuccess('You have successfully logged in!');
+                            this.auth = Auth;
+                            this.status = Status;
                             this.$router.push('/');
                         }
                         this.isProcessing = false;
@@ -69,19 +73,19 @@
                 this.error = {};
                 get(`/api/social/${provider}`)
                     .then((response) => {
-                    if(response.data.error){
-                        this.error = err.response.data.error;
-                    } else if(response.data.redirectUrl){
-                        window.location.href = response.data.redirectUrl
-                    }
-                })
+                        if(response.data.error){
+                            this.error = err.response.data.error;
+                        } else if(response.data.redirectUrl){
+                            window.location.href = response.data.redirectUrl;
+                        }
+                    })
                     .catch((err) => {
-                    if(err.response.data.error){
-                        this.error = err.response.data.error;
-                    }
+                        if(err.response.data.error){
+                            this.error = err.response.data.error;
+                        }
+                        this.isProcessing = false;
+                    });
                     this.isProcessing = false;
-                });
-                this.isProcessing = false;
             }
         }
     }
