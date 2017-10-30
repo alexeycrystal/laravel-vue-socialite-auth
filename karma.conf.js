@@ -3,12 +3,12 @@ delete webpackConf.entry
 
 module.exports = function(config) {
     config.set({
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
         frameworks: ['jasmine'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        reporters: ['progress'],
+        reporters: ['spec'],
         autoWatch: true,
         singleRun: true,
         concurrency: Infinity,
@@ -19,13 +19,13 @@ module.exports = function(config) {
         },
         basePath: './resources/assets/js/',
         files: [
-            {pattern: 'tests/**/*.js', watched: false},
+            {pattern: 'tests/**/*spec.js', watched: false}
         ],
         exclude: [
         ],
         preprocessors: {
             'app.js': ['webpack', 'babel'],
             'tests/**/*.spec.js': ['babel', 'webpack']
-        },
+        }
     })
 }
