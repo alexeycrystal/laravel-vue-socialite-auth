@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistrationRequest;
 use App\User;
 
 
@@ -13,13 +15,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    private const REDIRECT_DASHBOARD = '/#/';
-    private const REDIRECT_LOGIN = '/#/login';
-
-    public function __construct()
-    {
-        $this->middleware('auth:api')->only('logout');
-    }
 
     /**
      * Redirect the user to the social network authentication page.
@@ -80,13 +75,8 @@ class AuthController extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function register(RegistrationRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|between:6,25|confirmed'
-        ]);
         $user = new User($request->all());
         $user->name = $request->name;
         $user->password = bcrypt($request->password);
@@ -100,12 +90,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|between:6,25'
-        ]);
         $user = User::where('email', $request->email)->first();
         if ($user && Hash::check($request->password, $user->password)) {
             $user->api_token = str_random(60);
