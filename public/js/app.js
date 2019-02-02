@@ -2021,6 +2021,26 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.isProcessing = false;
       });
+    },
+    socialLogin: function socialLogin(provider) {
+      var _this2 = this;
+
+      this.isProcessing = true;
+      this.error = {};
+      Object(_helpers_api__WEBPACK_IMPORTED_MODULE_0__["get"])("/api/social/".concat(provider)).then(function (response) {
+        if (response.data.error) {
+          _this2.error = err.response.data.error;
+        } else if (response.data.redirectUrl) {
+          window.location.href = response.data.redirectUrl;
+        }
+      }).catch(function (err) {
+        if (err.response.data.error) {
+          _this2.error = err.response.data.error;
+        }
+
+        _this2.isProcessing = false;
+      });
+      this.isProcessing = false;
     }
   }
 });
@@ -3153,36 +3173,59 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "right" }, [
+        _c("div", { staticClass: "connect" }, [_vm._v("or connect with")]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "facebook",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.socialLogin("facebook")
+              }
+            }
+          },
+          [_c("span", { staticClass: "fontawesome-facebook" })]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "twitter",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.socialLogin("twitter")
+              }
+            }
+          },
+          [_c("span", { staticClass: "fontawesome-twitter" })]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "google-plus",
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.socialLogin("google")
+              }
+            }
+          },
+          [_c("span", { staticClass: "fontawesome-google-plus" })]
+        )
+      ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "right" }, [
-      _c("div", { staticClass: "connect" }, [_vm._v("or register with")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "facebook", attrs: { href: "" } }, [
-        _c("span", { staticClass: "fontawesome-facebook" })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("a", { staticClass: "twitter", attrs: { href: "" } }, [
-        _c("span", { staticClass: "fontawesome-twitter" })
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("a", { staticClass: "google-plus", attrs: { href: "" } }, [
-        _c("span", { staticClass: "fontawesome-google-plus" })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
