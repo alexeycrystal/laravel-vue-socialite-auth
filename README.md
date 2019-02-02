@@ -20,7 +20,8 @@ After the git clone, run this commands & editions one after one to start the app
 ##### * php artisan migrate
 ##### * create google, facebook, twitter API interfaces from the developers websites
 ##### * Example configuration: [Google example config](https://socialiteproviders.netlify.com/providers/google.html).
-##### * Set all your parameters to the .env file
+##### * Copy my .env.example file and name it like .env 
+##### * Set all your Google & Facebook correct parameters to the .env file
 ##### * php artisan config:cache
 ##### * php artisan serve --host=0.0.0.0
 
