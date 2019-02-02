@@ -8,13 +8,13 @@
             <input type="email" name="email" id="email" v-model="form.email"/> <br />
 
             <label for="name">Name</label> <br />
-            <input type="text" name="email" id="name" v-model="form.name"/> <br />
+            <input type="text" name="name" id="name" v-model="form.name"/> <br />
 
-            <label for="password">Password</label> <br />
+            <label for="pass">Password</label> <br />
             <input type="password" name="password" id="pass" v-model="form.password"/> <br />
 
             <label for="passConfirm">Confirm password</label> <br />
-            <input type="password" name="password" id="passConfirm" v-model="form.password_confirmation"/> <br />
+            <input type="password" name="passwordConfirm" id="passConfirm" v-model="form.password_confirmation"/> <br />
 
             <input :disabled="isProcessing" type="submit" value="Register" />
         </div>
