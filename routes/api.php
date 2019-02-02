@@ -1,8 +1,11 @@
 <?php
 
-Route::get('/social/{provider}', 'AuthController@redirectToProvider');
-Route::get('/social/{provider}/callback', 'AuthController@handleProviderCallback');
+Route::get('/social/{provider}', 'SocialiteController@redirectToProvider');
+Route::get('/social/{provider}/callback', 'SocialiteController@handleProviderCallback');
 
-Route::post('/register', 'AuthController@register');
-Route::post('/login', 'AuthController@login');
-Route::post('/logout', 'AuthController@logout');
+Route::post('/register', 'RegisterController@register');
+Route::post('/login', 'LoginController@login');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/logout', 'LoginController@logout');
+});

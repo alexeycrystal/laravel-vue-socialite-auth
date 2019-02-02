@@ -27,4 +27,9 @@ class RegisterService implements RegisterServiceInterface
                 'code' => 200]
             : $errorResponse;
     }
+
+    public function registerBySocialite(): array
+    {
+
+    }
 }

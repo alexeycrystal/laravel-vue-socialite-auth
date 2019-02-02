@@ -13,24 +13,28 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
     "cross-env": "^5.0.1",
-    "jasmine-core": "^2.8.0",
-    "karma": "^1.7.1",
-    "karma-babel-preprocessor": "^7.0.0",
+    "jasmine-core": "^3.3.0",
+    "karma": "^4.0.0",
+    "karma-babel-preprocessor": "^8.0.0",
     "karma-chrome-launcher": "^2.2.0",
-    "karma-cli": "^1.0.1",
-    "karma-jasmine": "^1.1.0",
+    "karma-cli": "^2.0.0",
+    "karma-jasmine": "^2.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
-    "karma-spec-reporter": "0.0.31",
-    "karma-webpack": "^2.0.5",
-    "laravel-mix": "^1.0",
+    "karma-spec-reporter": "0.0.32",
+    "karma-webpack": "^3.0.5",
+    "laravel-mix": "^4.0",
     "phantomjs-prebuilt": "^2.1.15",
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.16.1",
+    "sass-loader": "^7.1.0",
     "vue-cli": "^2.9.1",
-    "vue-loader": "^13.3.0"
+    "vue-loader": "^15.6.2",
+    "vue-template-compiler": "^2.5.22"
   },
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.18.0",
     "vue": "^2.4.4",
     "vue-cookie": "^1.1.4",
-    "vue-router": "^2.7.0"
+    "vue-router": "^3.0.2"
   }
 }

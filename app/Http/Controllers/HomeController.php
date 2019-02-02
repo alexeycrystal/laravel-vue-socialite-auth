@@ -29,11 +29,13 @@ class HomeController extends Controller
 
     public function options(Request $request, Response $response)
     {
+        /*
         if ($request->getMethod() == "OPTIONS"){
             return response()->json([
                 'OPTIONS' => 'success',
             ]);
         }
         die();
+        */
     }
 }

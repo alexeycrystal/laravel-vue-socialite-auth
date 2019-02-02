@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\SocialiteLayerServiceProvider::class,
         /*
          * Third party providers
          */
@@ -232,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'SocialiteHelper' => App\Helpers\SocialiteHelper::class,
     ],
 
 ];
