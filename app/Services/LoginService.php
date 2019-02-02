@@ -8,29 +8,18 @@ use App\Http\Requests\LoginRequest;
 use App\Services\Contracts\LoginServiceInterface;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class LoginService implements LoginServiceInterface
 {
     public function login(LoginRequest $request): array
     {
-        $errorResponse = [
-            'error' => 'Provided email and password does not match or not exists!',
-            'code' => 422
-        ];
-        if (auth()->attempt([
-            'email' => $request->email,
-            'password' => $request->password])) {
+        if (auth()->attempt($this->constructCredentials($request))) {
             $user = auth()->user();
             return $user->createToken()->save()
-                ? [
-                    'authenticated' => true,
-                    'api_token' => $user->api_token,
-                    'user_id' => $user->id,
-                    'code' => 200]
-                : $errorResponse;
+                ? $this->prepareSuccessResult($user)
+                : $this->prepareErrorResult();
         }
-        return $errorResponse;
+        return $this->prepareErrorResult();
     }
 
     public function logout(Request $request): array
@@ -38,5 +27,31 @@ class LoginService implements LoginServiceInterface
         return auth()->user()->revokeToken()->save()
             ? ['logged_out' => true, 'code' => 200]
             : ['error' => 'Error occurs', 'code' => 409];
+    }
+
+    private function constructCredentials($request): array
+    {
+        return [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+    }
+
+    private function prepareErrorResult(): array
+    {
+        return [
+            'error' => 'Provided email and password does not match or not exists!',
+            'code' => 422
+        ];
+    }
+
+    private function prepareSuccessResult(User $user): array
+    {
+        return [
+            'authenticated' => true,
+            'api_token' => $user->api_token,
+            'user_id' => $user->id,
+            'code' => 200
+        ];
     }
 }
